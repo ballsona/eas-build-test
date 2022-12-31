@@ -25,7 +25,7 @@ jobs:
         run: yarn install
 
       - name: Publish to Expo & create a QR code
-        uses: expo/expo-preview-action@v7
+        uses: expo/expo-preview-action@v1
         with:
           channel: pr-${{ github.event.number }}
         id: preview
