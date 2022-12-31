@@ -21,11 +21,11 @@ jobs:
           eas-version: latest
           token: ${{ secrets.EXPO_TOKEN }}
 
-      - name: Install dependencies
+      - name: 📦 Install dependencies
         run: yarn install
 
       - name: Publish to Expo & create a QR code
-        uses: expo/expo-preview-action@v1
+        uses: expo/expo-preview-action@v7
         with:
           channel: pr-${{ github.event.number }}
         id: preview
