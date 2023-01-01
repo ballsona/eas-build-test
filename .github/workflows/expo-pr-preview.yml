@@ -14,6 +14,14 @@ jobs:
           node-version: 16.x
           cache: yarn
 
+      - uses: 8BitJonny/gh-get-current-pr@1.3.0
+        id: PR
+        name: Check if we're in a PR
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          sha: ${{ github.event.pull_request.head.sha }}
+          filterOutClosed: true
+
       - name: 🏗 Setup Expo and EAS
         uses: expo/expo-github-action@v7
         with:
@@ -27,12 +35,28 @@ jobs:
       - name: 🚀 Publish to Expo
         run: NODE_OPTIONS=--max-old-space-size=5120 EXPO_DEBUG=true STAGE=staging eas update --branch pr-${{ steps.PR.outputs.number }} --message "Deploy to PR preview"
 
-      - name: Comment deployment link
-        uses: unsplash/comment-on-pr@master
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - name: Preview Deep Link
+        id: publish-url
+        run: echo "::set-output name=url::exp+io.showtime.development://expo-development-client/?url=https://u.expo.dev/45cbf5d5-24fe-4aa6-9580-acf540651abd&channel-name=pr-${{ steps.PR.outputs.number }}"
+
+      - name: Find PR Comment
+        uses: peter-evans/find-comment@v1
+        if: success() && steps.PR.outputs.number != ''
+        id: existing-comment
         with:
-          msg: >
+          issue-number: ${{ steps.PR.outputs.number }}
+          body-includes: PR Preview - App
+
+      - name: Create or update comment
+        uses: peter-evans/create-or-update-comment@v1
+        if: success() && steps.PR.outputs.number != ''
+        with:
+          comment-id: ${{ steps.existing-comment.outputs.comment-id }}
+          issue-number: ${{ steps.PR.outputs.number }}
+          edit-mode: replace
+          body: |
             ## PR Preview - App
             This pull request preview deployment is now available.
-            ✅ Preview: ${{ steps.publish-url.outputs.url }}
+            ✅ Preview: <a href="${{ steps.publish-url.outputs.url }}">${{ steps.publish-url.outputs.url }}</a>
+            <a href="${{ steps.publish-url.outputs.url }}"><img src="https://api.qrserver.com/v1/create-qr-code/?size=512x512&data=${{ steps.publish-url.outputs.url }}" height="512px" width="512px" /></a>
+            Comment ID: ${{ steps.existing-comment.outputs.comment-id }}
