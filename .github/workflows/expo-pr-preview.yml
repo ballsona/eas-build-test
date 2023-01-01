@@ -27,13 +27,12 @@ jobs:
       - name: 🚀 Publish to Expo
         run: NODE_OPTIONS=--max-old-space-size=5120 EXPO_DEBUG=true STAGE=staging eas update --branch pr-${{ steps.PR.outputs.number }} --message "Deploy to PR preview"
 
-      - name: Create or update comment
-        uses: peter-evans/create-or-update-comment@v1
+      - name: Comment deployment link
+        uses: unsplash/comment-on-pr@master
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
-          comment-id: 1
-          issue-number: 1
-          edit-mode: replace
-          body: |
+          msg: >
             ## PR Preview - App
             This pull request preview deployment is now available.
             ✅ Preview: <a href="${{ steps.publish-url.outputs.url }}">${{ steps.publish-url.outputs.url }}</a>
