@@ -30,8 +30,8 @@ jobs:
       - name: Create or update comment
         uses: peter-evans/create-or-update-comment@v1
         with:
-          comment-id: ${{ steps.existing-comment.outputs.comment-id }}
-          issue-number: ${{ steps.PR.outputs.number }}
+          comment-id: 1
+          issue-number: 1
           edit-mode: replace
           body: |
             ## PR Preview - App
