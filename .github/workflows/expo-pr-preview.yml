@@ -27,13 +27,6 @@ jobs:
       - name: 🚀 Publish to Expo
         run: NODE_OPTIONS=--max-old-space-size=5120 EXPO_DEBUG=true STAGE=staging eas update --branch pr-${{ steps.PR.outputs.number }} --message "Deploy to PR preview"
 
-      - name: Find PR Comment
-        uses: peter-evans/find-comment@v1
-        id: existing-comment
-        with:
-          issue-number: ${{ steps.PR.outputs.number }}
-          body-includes: PR Preview - App
-
       - name: Create or update comment
         uses: peter-evans/create-or-update-comment@v1
         with:
