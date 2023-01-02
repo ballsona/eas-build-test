@@ -33,4 +33,4 @@ jobs:
         run: yarn install
 
       - name: 🚀 Build App
-        run: eas build --profile development --platform android
+        run: eas build --profile development --platform android --non-interactive
