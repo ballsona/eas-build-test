@@ -14,6 +14,14 @@ jobs:
           node-version: 16.x
           cache: yarn
 
+      - uses: 8BitJonny/gh-get-current-pr@1.3.0
+        id: PR
+        name: Check if we're in a PR
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          sha: ${{ github.event.pull_request.head.sha }}
+          filterOutClosed: true
+
       - name: 🏗 Setup Expo and EAS
         uses: expo/expo-github-action@v7
         with:
@@ -24,21 +32,5 @@ jobs:
       - name: 📦 Install dependencies
         run: yarn install
 
-      - name: Publish to Expo & create a QR code
-        uses: expo/expo-preview-action@v1
-        with:
-          channel: pr-${{ github.event.number }}
-        id: preview
-
-      - name: Comment deployment link
-        uses: unsplash/comment-on-pr@master
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        with:
-          msg: >
-            You can [preview the PR here](${{ steps.preview.outputs.EXPO_QR_CODE_URL }}).<br><br>
-            <a href="${{ steps.publish.outputs.EXPO_QR_CODE_URL }}"><img src="${{ steps.preview.outputs.EXPO_QR_CODE_URL }}" height="512px" width="512px"></a>
-            <br><br>
-            QR code not working or need a different client? Try the QR code or deep link from the [project page](${{steps.preview.outputs.EXPO_PROJECT_URL}}).
-            <br><br>
-            ${{ steps.publish.outputs.EXPO_NEW_BUILD_IS_REQUIRED_MESSAGE }}
+      - name: 🚀 Build App
+        run: eas build --profile development --platform all --non-interactive
