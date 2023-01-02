@@ -15,13 +15,13 @@
     "expo-splash-screen": "~0.17.5",
     "expo-status-bar": "~1.4.2",
     "expo-updates": "~0.15.6",
-    "g": "^2.0.1",
     "react": "18.1.0",
-    "react-native": "0.70.5",
-    "react-native-unimodules": "^0.14.10"
+    "react-native": "0.70.5"
   },
   "devDependencies": {
-    "@babel/core": "^7.12.9"
+    "@babel/core": "^7.12.9",
+    "babel-loader": "^8.3.0",
+    "react-dom": "18.1.0"
   },
   "private": true
 }
