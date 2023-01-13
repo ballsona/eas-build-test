@@ -40,6 +40,6 @@ jobs:
     name: Build
     steps:
       - uses: actions/checkout@v3
-      - run: npm ci # CI 서버에 패키지 설치
-      - run: npm test
-      - run: npm run build
+      - run: yarn install --frozen-lockfile # CI 서버에 패키지 설치
+      - run: yarn test
+      - run: yarn build
