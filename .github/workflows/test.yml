@@ -43,14 +43,29 @@ jobs:
   #    - run: yarn install --frozen-lockfile # CI 서버에 패키지 설치
   #    - run: yarn test
   #    - run: yarn build
-  job6:
+  #job6:
+  #  runs-on: ubuntu-latest
+  #  name: JobExample
+  #  steps:
+  #    - run: echo 'hello'
+  #job7:
+  #  runs-on: ubuntu-latest
+  #  name: JobExample2
+  #  if: ${{ !contains(github.event.head_commit.message,'gdsc')}}
+  #  steps:
+  #    - run: echo 'GDSC'
+  job8:
     runs-on: ubuntu-latest
-    name: JobExample
+    name: Ubunutu-test
     steps:
-      - run: echo 'hello'
-  job7:
-    runs-on: ubuntu-latest
-    name: JobExample2
-    if: ${{ !contains(github.event.head_commit.message,'gdsc')}}
+      - run: date
+  job9:
+    runs-on: windows-latest
+    name: Window-test
     steps:
-      - run: echo 'GDSC'
+      - run: date
+  job10:
+    runs-on: macos-latest
+    name: Macos-test
+    steps:
+      - run: date
