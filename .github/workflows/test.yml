@@ -4,11 +4,11 @@ name: Test for GDSC Semina
 on:
   push:
 jobs:
-  job1:
-    name: Echo
-    runs-on: ubuntu-latest
-    steps:
-      - run: echo 'Hello, Github Actions!'
+  #job1:
+  #  name: Echo
+  #  runs-on: ubuntu-latest
+  #  steps:
+  #    - run: echo 'Hello, Github Actions!'
   #job2:
   #  name: PWD & LS
   #  runs-on: ubuntu-latest
@@ -17,20 +17,29 @@ jobs:
   #      run: pwd
   #    - name: List files
   #      run: ls -al # 현재 CI 서버에 있는 파일을 살펴본다.
-  job3:
-    name: Checkout
+  #job3:
+  #  name: Checkout
+  #  runs-on: ubuntu-latest
+  #  steps:
+  #    - run: ls -al
+  #    - uses: actions/checkout@v3
+  #- run: ls -al
+  #- run: cat .github/workflows/test.yml
+  #job4:
+  #  runs-on: ubuntu-latest
+  #  name: Cache
+  #  steps:
+  #    - run: npm ci
+  #    - uses: actions/cache@v3
+  #      with:
+  #        path: ~/.npm
+  #        key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
+  #    - run: npm ci
+  job5:
     runs-on: ubuntu-latest
+    name: Build
     steps:
-      - run: ls -al
       - uses: actions/checkout@v3
-      #- run: ls -al
-      #- run: cat .github/workflows/test.yml
-  job4:
-    runs-on: ubuntu-latest
-    name: Cache
-    steps:
-      - run: npm ci
-      - uses: actions/cache@v3
-        with:
-          path: ~/.npm
-          key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
+      - run: npm ci # CI 서버에 패키지 설치
+      - run: npm test
+      - run: npm run build
