@@ -54,18 +54,29 @@ jobs:
   #  if: ${{ !contains(github.event.head_commit.message,'gdsc')}}
   #  steps:
   #    - run: echo 'GDSC'
-  job8:
-    runs-on: ubuntu-latest
-    name: Ubunutu-test
-    steps:
-      - run: date
-  job9:
-    runs-on: windows-latest
-    name: Window-test
-    steps:
-      - run: date
-  job10:
-    runs-on: macos-latest
-    name: Macos-test
+  #job8:
+  #  runs-on: ubuntu-latest
+  #  name: Ubunutu-test
+  #  steps:
+  #    - run: date
+  #job9:
+  #  runs-on: windows-latest
+  #  name: Window-test
+  #  steps:
+  #    - run: date
+  #job10:
+  #  runs-on: macos-latest
+  #  name: Macos-test
+  #  steps:
+  #    - run: date
+  job11:
+    runs-on: ${{ matrix.os }}
+    name: OS-test
+    strategy:
+      matrix:
+        os:
+          - ubuntu-latest
+          - windows-latest
+          - macos-latest
     steps:
       - run: date
