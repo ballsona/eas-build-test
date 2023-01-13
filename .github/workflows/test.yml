@@ -9,18 +9,19 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - run: echo 'Hello, Github Actions!'
-  job2:
-    name: PWD & LS
-    runs-on: ubuntu-latest
-    steps:
-      - name: Prink Working Directory
-        run: pwd
-      - name: List files
-        run: ls -al # 현재 CI 서버에 있는 파일을 살펴본다.
-      - name: Checkout
-        uses: actions/checkout@v3
-  #job3:
-  #  name: Checkout
+  #job2:
+  #  name: PWD & LS
   #  runs-on: ubuntu-latest
   #  steps:
-  #    - run:
+  #    - name: Prink Working Directory
+  #      run: pwd
+  #    - name: List files
+  #      run: ls -al # 현재 CI 서버에 있는 파일을 살펴본다.
+  job3:
+    name: Checkout
+    runs-on: ubuntu-latest
+    steps:
+      - run: ls -al
+      - uses: actions/checkout@v3
+      - run: ls -al
+      - run: cat .github/workflows/checkout.yml
