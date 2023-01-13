@@ -1,0 +1,16 @@
+# 워크플로우 이름. 생략시 파일 경로가 이름으로 사용된다.
+name: Test for GDSC Semina
+# 워크플로우가 언제 실행될지.
+on:
+  push:
+    branches:
+      - main
+jobs:
+  job1:
+    runs-on: ubuntu-latest
+    steps:
+      - run: echo 'Hello, Github Actions!'
+  #job2:
+  #  runs-on: ubuntu-latest
+  #job3:
+  #  runs-on: ubuntu-latest
