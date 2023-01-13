@@ -3,14 +3,18 @@ name: Test for GDSC Semina
 # 워크플로우가 언제 실행될지.
 on:
   push:
-    branches:
-      - main
 jobs:
   job1:
     runs-on: ubuntu-latest
     steps:
       - run: echo 'Hello, Github Actions!'
-  #job2:
-  #  runs-on: ubuntu-latest
+  job2:
+    name: PWD & LS
+    runs-on: ubuntu-latest
+    steps:
+      - name: Prink Working Directory
+        run: pwd
+      - name: List files
+        run: ls -al
   #job3:
   #  runs-on: ubuntu-latest
