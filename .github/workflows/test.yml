@@ -69,14 +69,29 @@ jobs:
   #  name: Macos-test
   #  steps:
   #    - run: date
-  job11:
-    runs-on: ${{ matrix.os }}
-    name: OS-test
-    strategy:
-      matrix:
-        os:
-          - ubuntu-latest
-          - windows-latest
-          - macos-latest
+  #job11:
+  #  runs-on: ${{ matrix.os }}
+  #  name: OS-test
+  #  strategy:
+  #    matrix:
+  #      os:
+  #        - ubuntu-latest
+  #        - windows-latest
+  #        - macos-latest
+  #  steps:
+  #    - run: date
+  job12:
+    runs-on: ubuntu-latest
+    name: StepExample
     steps:
-      - run: date
+      - id: gen-num1
+        run: echo "::set-output name=num::$(( $RANDOM % 10 + 1 ))"
+      - id: gen-num2
+        run: echo "::set-output name=num::$(( $RANDOM % 10 + 1 ))"
+      - run: echo $(( ${{ steps.gen-num1.outputs.num + steps.gen-num2.outputs.num }}))
+      - id: gen-num3
+        run: echo "::set-output name=num::$(( $RANDOM % 2 ))"
+      - if: setps.gen-num3.outputs.num == 0
+        run: echo zero
+      - if: setps.gen-num3.outputs.num == 1
+        run: echo one
