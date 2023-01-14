@@ -1,7 +1,5 @@
 name: Github Action Test
-on:
-  push:
-    branches: [master]
+on: [pull_request]
 jobs:
   job1:
     name: Echo
