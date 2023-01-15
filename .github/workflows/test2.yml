@@ -1,17 +1,14 @@
 name: Github Action Test
-on:
-  schedule:
-    - cron: '0 0 * * *' # 12.am daily
-
+on: [push, pull_request]
 jobs:
   job1:
     name: Echo
-    runs-on: ubuntu-latest
+    runs-on: macos-latest
     steps:
       - run: echo 'Hello GDSC!'
   job2:
-    name: PWD & LS
-    runs-on: macos-latest
+    name: Checkout
+    runs-on: ubuntu-latest
     steps:
-      - run: pwd
+      - run: actions/checkout@v2
       - run: ls -al
