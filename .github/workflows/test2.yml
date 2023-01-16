@@ -1,16 +1,16 @@
 name: Github Action Test
 on:
-  push:
-    branches: [master]
+  issues:
+
 jobs:
   job1:
     name: Echo
-    runs-on: ubuntu-latest
+    runs-on: macos-latest
     steps:
       - run: echo 'Hello GDSC!'
   job2:
-    name: PWD & LS
-    runs-on: macos-latest
+    name: Checkout
+    runs-on: ubuntu-latest
     steps:
-      - run: pwd
+      - uses: actions/checkout@v2
       - run: ls -al
