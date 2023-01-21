@@ -6,9 +6,11 @@
     "start": "expo start --dev-client",
     "android": "expo run:android",
     "ios": "expo run:ios",
-    "web": "expo start --web"
+    "web": "expo start --web",
+    "prepare": "husky install"
   },
   "dependencies": {
+    "@commitlint/config-conventional": "^17.4.2",
     "expo": "~47.0.9",
     "expo-dev-client": "~2.0.1",
     "expo-splash-screen": "~0.17.5",
@@ -18,7 +20,9 @@
     "react-native": "0.70.5"
   },
   "devDependencies": {
-    "@babel/core": "^7.12.9"
+    "@babel/core": "^7.12.9",
+    "@commitlint/cli": "^17.4.2",
+    "husky": "^8.0.3"
   },
   "private": true
 }
