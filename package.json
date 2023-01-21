@@ -25,8 +25,5 @@
     "husky": "^8.0.3",
     "lint-staged": "^13.1.0"
   },
-  "private": true,
-  "lint-staged": {
-    "*.{ts,tsx,js,jsx}": ""
-  }
+  "private": true
 }
