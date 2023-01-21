@@ -22,7 +22,14 @@
   "devDependencies": {
     "@babel/core": "^7.12.9",
     "@commitlint/cli": "^17.4.2",
-    "husky": "^8.0.3"
+    "husky": "^8.0.3",
+    "lint-staged": "^13.1.0"
   },
-  "private": true
+  "private": true,
+  "lint-staged": {
+    "*.{ts,tsx}": [
+      "prettier --write",
+      "eslint --cache --fix"
+    ]
+  }
 }
